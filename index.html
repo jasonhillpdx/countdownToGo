@@ -58,15 +58,18 @@
         {
             color: #999999;
             font-size: 45%;
-            text-align: right;
-            padding-top: 5%;
-            padding-right: 2%;
-            padding-bottom: 5%;
+            float:right;
         }
-
+        div#footer
+        {
+            padding-top:5%;
+            padding-left:2%;
+            padding-right:2%;
+            padding-bottom:0%;
+        }
         div.closest
         {
-            font-size: 50% padding-top: 15%;
+            float:left;
         }
         /*Fancy Toggle*/
         .tgl
@@ -289,11 +292,12 @@
         <div id="arrivalHolder">
             Loading...
         </div>
-        <div>
-            <p id="footnote">*Gray times are estimates due to tracking error.</p>
+        <div id="footer">
+            <div class="closest">
+                <input type="checkbox" class="tgl tgl-flat" id="showClosest">
+                <label for="showClosest" class="tgl-btn" style="font-size: 50%;"></label>
+            </div>
+            <div id="footnote">*Gray times are estimates due to tracking error.</div>
         </div>
-        <div class="closest">
-            <input type="checkbox" class="tgl tgl-flat" id="showClosest">
-            <label for="showClosest" class="tgl-btn" style="font-size: 50%;"></label>
-        </div>
+        
 </html>
