@@ -70,6 +70,19 @@
         div.closest
         {
             float:left;
+            z-index:101;
+            position:relative;
+        }
+        .dimmer {
+            display: none;
+            background: #000;
+            opacity: 0.85;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
         }
         /*Fancy Toggle*/
         .tgl
@@ -167,9 +180,12 @@
     $(document).ready(function () {
         setInterval(function () {
             getArrivals()
-        }, 1000);
+        }, 3000);
+        $('#toggleNight').on('change', function () {
+            toggleNightMode();
+        });
     });
-
+    var nightToggleTime = 0;
     function getArrivals() {
         var locations = [6802, 6801, 5934, 5935]
         $.ajax({
@@ -196,9 +212,6 @@
                     }
                 }
                 $("#arrivalHolder").html(display);
-                $("#clock").html(getClock());
-                $("#date").html(getDate());
-                return
             },
             error: function (request, error) {
                 $("#arrivalHolder").html("An error occurred querying for arrivals.");
@@ -206,6 +219,7 @@
             complete: function (data) {
                 $("#clock").html(getClock());
                 $("#date").html(getDate());
+                handleNightMode();
             }
         });
     }
@@ -267,7 +281,27 @@
         var strTime = hours + ':' + minutes // + ' ' + ampm
         return strTime;
     }
-
+    function handleNightMode() {
+        var date = new Date();
+        var currtime = date.getHours() * 100 + date.getMinutes();
+        if (currtime >= 2200 || currtime < 430) {
+            //nighttime
+            if (nightToggleTime == 0) {
+                startNightMode();
+            }
+            else {
+                if (Date.now() - nightToggleTime > 30000) {
+                    startNightMode();
+                    nightToggleTime = 0;
+                }
+            }
+        }
+        else {
+            if (nightToggleTime == 0) {
+                endNightMode();
+            }            
+        }
+    }
     function getDate() {
         var d = new Date();
         var dayofweek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sat'][d.getDay()],
@@ -279,25 +313,41 @@
         var strTime = dayofweek + ", " + month + " " + date + ", " + year;
         return strTime;
     }
-
-
+    function startNightMode() {
+       $('.dimmer').show();
+    }
+    function endNightMode() {
+       $('.dimmer').hide();
+    }
+    function toggleNightMode() {
+        $('.dimmer').toggle();
+        nightToggleTime = Date.now();
+    }
 
 </script>
-<body>
-    <div id="MainContent" style="width: 100%; margin-top: 2%; padding: 10px 10px 10px 10px;">
-        <div>
-            <h1 id="clock">arrivals</h1>
-            <h4 id="date"></h4>
-        </div>
-        <div id="arrivalHolder">
-            Loading...
-        </div>
-        <div id="footer">
-            <div class="closest">
-                <input type="checkbox" class="tgl tgl-flat" id="showClosest">
-                <label for="showClosest" class="tgl-btn" style="font-size: 50%;"></label>
+   <body>
+        <div id="MainContent" style="width: 100%; margin-top: 2%; padding: 10px 10px 10px 10px;">
+            <div>
+                <h1 id="clock">arrivals</h1>
+                <h4 id="date"></h4>
             </div>
-            <div id="footnote">*Gray times are estimates due to tracking error.</div>
+            <div id="arrivalHolder">
+                Loading...
+            </div>
+            <div id="footer">
+                <div class="closest">
+                    <div style="float:left;">
+                        <input type="checkbox" class="tgl tgl-flat" id="showClosest">
+                        <label for="showClosest" class="tgl-btn" style="font-size: 50%;"></label>
+                    </div>
+                    <div style="float:right; margin-left:5px;">
+                        <input type="checkbox" class="tgl tgl-flat" id="toggleNight">
+                        <label for="toggleNight" class="tgl-btn" style="font-size: 50%;"></label>
+                    </div>
+                </div>
+                <div id="footnote">*Gray times are estimates due to tracking error.</div>
+            </div>
         </div>
-        
+        <div class="dimmer" style="display:none;"></div>
+    </body>        
 </html>
