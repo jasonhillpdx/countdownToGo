@@ -6,30 +6,33 @@
     <style>
         body
         {
-            font-size: 300%;
+            font-size: 450%;
             font-family: "Verdana", sans-serif;
             font-weight: bold;
-            background: #101010 url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/TriMet_logo_simplified.svg/1024px-TriMet_logo_simplified.svg.png) no-repeat center fixed;
+            background: #151515 url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/TriMet_logo_simplified.svg/1024px-TriMet_logo_simplified.svg.png) no-repeat center fixed;
             color: white;
-            background-size: 50%;
+            background-size: 70%;
             background-blend-mode: overlay;
+	    overflow: hidden;
         }
 
         h1
         {
-            font-size: 400%;
+            font-size: 500%;
             text-align: center;
             text-transform: uppercase;
             font-weight: bold;
+	    margin-top: -60px;
             margin-bottom: 0;
         }
 
         h4
         {
-            font-size: 35%;
+            font-size: 65%;
             text-align: center;
             padding-bottom: 10pt;
-            margin-top: -30px;
+            margin-top: -65px;
+	    margin-bottom: -10px;
         }
 
         h2
@@ -39,7 +42,8 @@
             text-transform: uppercase;
             font-weight:;
             padding-top: 2%;
-            padding-left: 7%;
+            padding-left: 15%;
+	    padding-bottom: -50%;
         }
 
         table
@@ -47,11 +51,14 @@
             align: center;
             width: 97%;
             border: 0px solid white;
+	    padding-left:5%
+	    padding-top: -10%
         }
 
         td
         {
-            border: 0px solid white;
+            padding-top: -100%;
+	    border: 0px solid white;
         }
 
         #footnote
@@ -180,7 +187,7 @@
     $(document).ready(function () {
         setInterval(function () {
             getArrivals()
-        }, 3000);
+        }, 1000);
         $('#toggleNight').on('change', function () {
             toggleNightMode();
         });
