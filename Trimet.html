@@ -13,7 +13,7 @@
             color: white;
             background-size: 70%;
             background-blend-mode: overlay;
-	    overflow: hidden;
+	        overflow: hidden;
         }
 
         h1
@@ -22,7 +22,7 @@
             text-align: center;
             text-transform: uppercase;
             font-weight: bold;
-	    margin-top: -60px;
+	        margin-top: -60px;
             margin-bottom: 0;
         }
 
@@ -43,7 +43,7 @@
             font-weight:;
             padding-top: 2%;
             padding-left: 15%;
-	    padding-bottom: -50%;
+            padding-bottom: -50%;
         }
 
         table
@@ -51,34 +51,46 @@
             align: center;
             width: 97%;
             border: 0px solid white;
-	    padding-left:5%
-	    padding-top: -10%
+            padding-left: 5%;
+             padding-top: -10%;
         }
 
         td
         {
             padding-top: -100%;
-	    border: 0px solid white;
+            border: 0px solid white;
         }
 
         #footnote
         {
             color: #999999;
             font-size: 45%;
-            float:right;
+            right:2%;
+            position:fixed;
         }
-        div#footer
+        div#footerLeft
         {
-            padding-top:5%;
-            padding-left:2%;
-            padding-right:2%;
-            padding-bottom:0%;
+            padding-left: 2%;
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            height: 50px;
+            width: 48%; 
+            z-index:101;  
+        }
+        div#footerRight
+        {
+            padding-right: 2%;
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            height: 50px;
+            width: 48%;   
         }
         div.closest
         {
-            float:left;
-            z-index:101;
-            position:relative;
+            position:fixed;
+            display: none;
         }
         .dimmer {
             display: none;
@@ -96,90 +108,79 @@
         {
             display: none;
         }
-
-            .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn
-            {
-                box-sizing: border-box;
-            }
-
-                .tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection
-                {
-                    background: none;
-                }
-
-                .tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection
-                {
-                    background: none;
-                }
-
-                .tgl + .tgl-btn
-                {
-                    outline: 0;
-                    display: block;
-                    width: 2em;
-                    height: 1em;
-                    position: relative;
-                    cursor: pointer;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    -ms-user-select: none;
-                    user-select: none;
-                }
-
-                    .tgl + .tgl-btn:after, .tgl + .tgl-btn:before
-                    {
-                        position: relative;
-                        display: block;
-                        content: "";
-                        width: 50%;
-                        height: 100%;
-                    }
-
-                    .tgl + .tgl-btn:after
-                    {
-                        left: 0;
-                    }
-
-                    .tgl + .tgl-btn:before
-                    {
-                        display: none;
-                    }
-
-                .tgl:checked + .tgl-btn:after
-                {
-                    left: 50%;
-                }
-
-
-        .tgl-flat + .tgl-btn
+        .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn
         {
-            padding: 2px;
-            -webkit-transition: all .2s ease;
-            transition: all .2s ease;
-            background: #333;
-            border: 2px solid #555;
-            border-radius: 2em;
+            box-sizing: border-box;
         }
-
-            .tgl-flat + .tgl-btn:after
-            {
-                -webkit-transition: all .2s ease;
-                transition: all .2s ease;
-                background: #555;
-                content: "";
-                border-radius: 1em;
-            }
-
-        .tgl-flat:checked + .tgl-btn
+        .tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection
         {
-            border: 2px solid #555;
+            background: none;
         }
+        .tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection
+        {
+            background: none;
+        }
+        .tgl + .tgl-btn
+        {
+            outline: 0;
+            display: block;
+            width: 2em;
+            height: 1em;
+            position: relative;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .tgl + .tgl-btn:after, .tgl + .tgl-btn:before
+        {
+            position: relative;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 100%;
+        }
+        .tgl + .tgl-btn:after
+        {
+            left: 0;
+        }
+        .tgl + .tgl-btn:before
+        {
+            display: none;
+        }
+        .tgl:checked + .tgl-btn:after
+        {
+            left: 50%;
+        }
+    .tgl-flat + .tgl-btn
+    {
+    padding: 2px;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    background: #333;
+    border: 2px solid #555;
+    border-radius: 2em;
+    }
+    .tgl-flat + .tgl-btn:after
+    {
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+        background: #555;
+        content: "";
+        border-radius: 1em;
+    }
 
-            .tgl-flat:checked + .tgl-btn:after
-            {
-                left: 50%;
-                background: #555;
-            }
+    .tgl-flat:checked + .tgl-btn
+    {
+    border: 2px solid #555;
+    }
+
+    .tgl-flat:checked + .tgl-btn:after
+    {
+        left: 50%;
+        background: #555;
+    }
     </style>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -190,6 +191,17 @@
         }, 1000);
         $('#toggleNight').on('change', function () {
             toggleNightMode();
+        });
+        var i = null;
+        $("body").mousemove(function () {
+            clearTimeout(i);
+            $("div.closest").show();
+            i = setTimeout(function () {
+                $("div.closest").hide();
+            }, 10000);
+        }).mouseleave(function () {
+            clearTimeout(i);
+            $("div.closest").hide();
         });
     });
     var nightToggleTime = 0;
@@ -341,7 +353,7 @@
             <div id="arrivalHolder">
                 Loading...
             </div>
-            <div id="footer">
+            <div id="footerLeft">
                 <div class="closest">
                     <div style="float:left;">
                         <input type="checkbox" class="tgl tgl-flat" id="showClosest">
@@ -352,6 +364,8 @@
                         <label for="toggleNight" class="tgl-btn" style="font-size: 50%;"></label>
                     </div>
                 </div>
+            </div>
+            <div id="footerRight">
                 <div id="footnote">*Gray times are estimates due to tracking error.</div>
             </div>
         </div>
