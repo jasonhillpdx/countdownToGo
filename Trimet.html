@@ -40,7 +40,6 @@
             font-size: 65%;
             text-align: left;
             text-transform: uppercase;
-            font-weight:;
             padding-top: 2%;
             padding-left: 15%;
             padding-bottom: -50%;
@@ -48,11 +47,10 @@
 
         table
         {
-            align: center;
             width: 97%;
             border: 0px solid white;
             padding-left: 5%;
-             padding-top: -10%;
+            padding-top: -10%;
         }
 
         td
@@ -213,27 +211,40 @@
             dataType: 'json',
             success: function (data) {
                 var display = '';
-                for (k = 0; k < locations.length; k++) {
-                    var arrival = $.grep(data.resultSet.arrival, function (e) {
-                        return e.locid == locations[k]
-                    })
-                    var location = $.grep(data.resultSet.location, function (e) {
-                        return e.id == locations[k]
-                    })
-                    for (i = 0; i < arrival.length; i++) {
-                        if (i == 0) {
-                            display = display + makeLocationDiv(arrival[i], location[0])
-                        }
-                        display = display + makeArrivalDiv(arrival[i], location[0])
-                        if ($("#showClosest").is(':checked')) {
-                            break;
+                try {
+					$("#Errors").empty();
+                    for (k = 0; k < locations.length; k++) {
+                        var arrival = $.grep(data.resultSet.arrival, function (e) {
+                            return e.locid == locations[k]
+                        })
+                        var location = $.grep(data.resultSet.location, function (e) {
+                            return e.id == locations[k]
+                        })
+                        for (i = 0; i < arrival.length; i++) {
+                            if (i == 0) {
+                                display = display + makeLocationDiv(arrival[i], location[0])
+                            }
+                            display = display + makeArrivalDiv(arrival[i], location[0])
+                            if ($("#showClosest").is(':checked')) {
+                                break;
+                            }
                         }
                     }
                 }
+                catch (error){
+                    $("#Errors").append("<p>Success error: " + getClock() + "</p>");
+                    $("#Errors").append("<p>" + error + "</p>");
+                }
                 $("#arrivalHolder").html(display);
             },
-            error: function (request, error) {
-                $("#arrivalHolder").html("An error occurred querying for arrivals.");
+            error: function (xhr, status, error) {
+                $("#arrivalHolder").append("<p>An error occurred querying for arrivals.</p>");
+                $("#Errors").append("<p>" + getClock() + "</p>");
+                $("#Errors").append("<p>" + xhr.responseText + "</p>");
+                $("#Errors").append("<p>" + xhr.responseJSON + "</p>");
+                $("#Errors").append("<p>" + xhr.HEADERS_RECEIVED.toString() + "</p>");
+                $("#Errors").append("<p>" + status + "</p>");
+                $("#Errors").append("<p>" + error + "</p>");
             },
             complete: function (data) {
                 $("#clock").html(getClock());
@@ -370,5 +381,6 @@
             </div>
         </div>
         <div class="dimmer" style="display:none;"></div>
+        <div id="Errors"></div>
     </body>        
 </html>
